@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+//// 10/18
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "30.0.1"
+
+    defaultConfig {
+        applicationId "jp.shimamoto.benkyo_button"
+        minSdkVersion 24
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+//// 10/18
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //// implementation 'com.google.android.material:material:1.0.0' //// 1. 10/17 これだけならマテリアルボタンおｋ
+    //// implementation 'com.google.android.material:material:1.2.1' ////2. 10/18 上記を最新 1.2.1にUPG->アプリが立上らない！
+
+    ////4. ↓3.と変化無し
+    //// implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc03'
+    ////6. ↓ 10/18 上記4を最新 1.2.1にUPG->アプリが立上らない！
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+
+    ////3. ↓ 10/18 マテリアルボタンのデザインが変わる、アプリが立上らない！https://github.com/YusukeIwaki/MaterialButtonToggleGroupPlayground/blob/master/app/build.gradle
+    //// implementation 'com.google.android.material:material:1.2.0-alpha03' ////
+
+    ////5. ↓ 10/18 上記3を最新 1.2.1にUPG->アプリが立上らない！
+    implementation 'com.google.android.material:material:1.3.0-alpha03'
+}
